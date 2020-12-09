@@ -1,4 +1,4 @@
-package com.example.a1first_application
+package com.example.a12logoandauthor
 
 class Post(
     val id: Int,
@@ -6,9 +6,7 @@ class Post(
     val author: String,
     val content: String,
     var likedByMe: Boolean = false
-)
+) {
 
 
-
-
-
+}
