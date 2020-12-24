@@ -1,14 +1,10 @@
 package com.example.a1first_application
 
-import android.graphics.Color
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.LayoutInflater
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a1first_application.databinding.ActivityMainBinding
-import java.time.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,30 +27,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val list = listOf(
-        Post(
-            1, "2020-12-09 19:20:03", "Petrov", "Post1",),
-        Post(
-            2, "2020-09-09 10:20:03", "Ivanov", "Post2",
-        ),
-        Post(
-            3, "2020-09-09 10:20:03", "Ivanov", "Post3",
-        ),
-        Post(
-            4, "2020-09-09 10:20:03", "Ivanov", "Post4",
-        ),
-        Post(
-            5, "2020-09-09 10:20:03", "Ivanov", "Post5",
-        ),
-        Post(
-            6, "2020-09-09 10:20:03", "Ivanov", "Post5",
-        ),
-        Post(
-            7, "2020-09-09 10:20:03", "Ivanov", "Post7",
-        ),
-        Post(
-            8, "2020-09-09 10:20:03", "Ivanov", "Post8",
-        ),
+            Post(PostTypes.SIMPLE, 1, "2020-12-09 19:20:03", "Petrov", "Post1", null, null,null,null,null) ,
+            Post(PostTypes.SIMPLE, 2, "2020-09-09 10:20:03", "Ivanov", "Post2",null, null,null,null,null),
+            Post(PostTypes.EVENT, 3, "2020-09-09 10:20:03", "Ivanov", "Post3","Москва, ул. Ленинская Слобода", Pair(56.13003526647825 , 40.41206278961915),null,null,null),
+            Post(PostTypes.REPOST,4,"2020-12-09 19:20:03","Petrov",null,null,null ,"RepostText",null,null),
+            Post(PostTypes.VIDEO,5,"2020-12-09 19:20:03", "Petrov", "Post5" ,null,null,null,"https://www.youtube.com/watch?v=WhWc3b3KhnY",null),
+            Post(PostTypes.ADV, 6, "2020-12-09 19:20:03", "Petrov", "Post6", null, null,null,null,"https://netology.ru/") ,
     )
+
 
 }
 

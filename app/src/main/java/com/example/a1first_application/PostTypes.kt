@@ -1,5 +1,5 @@
 package com.example.a1first_application
 
 enum class PostTypes {
-   EVENT,REPOST,video, ADV
+   SIMPLE, EVENT,REPOST,VIDEO, ADV
 }
