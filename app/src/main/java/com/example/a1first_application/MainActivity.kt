@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a1first_application.databinding.ActivityMainBinding
+import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var adapterPost: AdapterPost
 
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -20,22 +19,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = AdapterPost()
+        //val adapter = AdapterPost()
+
         binding.recyclerView.adapter = adapter
         adapter.submitList(list)
 
     }
 
-    private val list = listOf(
-            Post(PostTypes.SIMPLE, 1, "2020-12-09 19:20:03", "Petrov", "Post1", null, null,null,null,null) ,
-            Post(PostTypes.SIMPLE, 2, "2020-09-09 10:20:03", "Ivanov", "Post2",null, null,null,null,null),
-            Post(PostTypes.EVENT, 3, "2020-09-09 10:20:03", "Ivanov", "Post3","Москва, ул. Ленинская Слобода", Pair(56.13003526647825 , 40.41206278961915),null,null,null),
-            Post(PostTypes.REPOST,4,"2020-12-09 19:20:03","Petrov",null,null,null ,"RepostText",null,null),
-            Post(PostTypes.VIDEO,5,"2020-12-09 19:20:03", "Petrov", "Post5" ,null,null,null,"https://www.youtube.com/watch?v=WhWc3b3KhnY",null),
-            Post(PostTypes.ADV, 6, "2020-12-09 19:20:03", "Petrov", "Post6", null, null,null,null,"https://netology.ru/") ,
+   val list = listOf(
+            Post(PostType.SIMPLE, 1, "2020-12-09 19:20:03", "Petrov", "Post1", null, null,null,null,null) ,
+            Post(PostType.SIMPLE, 2, "2020-09-09 10:20:03", "Ivanov", "Post2",null, null,null,null,null),
+            Post(PostType.EVENT, 3, "2020-09-09 10:20:03", "Ivanov", "Post3","Москва, ул. Ленинская Слобода", Pair(56.13003526647825 , 40.41206278961915),null,null,null),
+            Post(PostType.REPOST,4,"2020-12-09 19:20:03","Petrov",null,null,null ,"RepostText",null,null),
+            Post(PostType.VIDEO,5,"2020-12-09 19:20:03", "Petrov", "Post5" ,null,null,null,"https://www.youtube.com/watch?v=WhWc3b3KhnY",null),
+            Post(PostType.ADV, 6, "2020-12-09 19:20:03", "Petrov", "Post6", null, null,null,null,"https://netology.ru/") ,
     )
 
+    private val adapter = AdapterPost {
+        currentList = currentList.toMutableList().apply { removeAt(it) }
+    }
 
+    private var currentList: List<Post> by Delegates.observable(emptyList()) { _, _, newValue ->
+        adapter.submitList(newValue)
+    }
+
+
+    init {
+        currentList = list
+    }
+    
 }
 
 

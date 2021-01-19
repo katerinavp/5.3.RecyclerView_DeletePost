@@ -1,5 +1,5 @@
 package com.example.a1first_application
 
-enum class PostTypes {
+enum class PostType {
    SIMPLE, EVENT,REPOST,VIDEO, ADV
 }

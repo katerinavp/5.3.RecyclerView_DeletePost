@@ -10,17 +10,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a1first_application.PostTypes.*
+import com.example.a1first_application.PostType.*
 import com.example.a1first_application.databinding.RecyclerviewItemBinding
 
-class AdapterPost : ListAdapter<Post, AdapterPost.PostViewHolder>(PostDiffer) {
+class AdapterPost(private val onRemovedListener: (position: Int) -> Unit) : ListAdapter<Post, AdapterPost.PostViewHolder>(PostDiffer) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder =
             PostViewHolder(
                     RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-            )
+            ).apply {
+                // TODO Прикрепить слушателя к нужной вьюшке
+                binding.imageFilter.setOnClickListener {
+                    onRemovedListener(adapterPosition)
+                }
+            }
 
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -29,7 +34,7 @@ class AdapterPost : ListAdapter<Post, AdapterPost.PostViewHolder>(PostDiffer) {
     }
 
     class PostViewHolder(
-            private val binding: RecyclerviewItemBinding,
+            internal val binding: RecyclerviewItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(post: Post) {
@@ -41,6 +46,7 @@ class AdapterPost : ListAdapter<Post, AdapterPost.PostViewHolder>(PostDiffer) {
                 imageLike.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 imageComment.setImageResource(R.drawable.ic_baseline_chat_bubble_outline_24)
                 imageShare.setImageResource(R.drawable.ic_baseline_share_24)
+                imageFilter.setImageResource(R.drawable.ic_baseline_filter_alt_24)
                 txtPost.visibility = View.VISIBLE
 
                 if (post.type == VIDEO) {
@@ -173,19 +179,18 @@ class AdapterPost : ListAdapter<Post, AdapterPost.PostViewHolder>(PostDiffer) {
 
                         context?.startActivity(intentAdv)
                     }
-
                 })
-
-
             }
         }
     }
 
     private object PostDiffer : DiffUtil.ItemCallback<Post>() {
-        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+        //который может вычислять разницу между двумя списками и выводить список операций обновления, которые преобразуют первый список во второй.
+        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean = //если id в  старом списке и новом списке одинаковые, то идем в метод areContentsTheSame и сравниваем эти объекты по другим полям
                 oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean = oldItem == newItem
+        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean = oldItem == newItem // сравнивает детали, поменялось ли что то или нет
     }
 
 }
+
