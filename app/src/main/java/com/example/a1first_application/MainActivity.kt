@@ -19,20 +19,84 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        //val adapter = AdapterPost()
-
         binding.recyclerView.adapter = adapter
         adapter.submitList(list)
 
     }
 
-   val list = listOf(
-            Post(PostType.SIMPLE, 1, "2020-12-09 19:20:03", "Petrov", "Post1", null, null,null,null,null) ,
-            Post(PostType.SIMPLE, 2, "2020-09-09 10:20:03", "Ivanov", "Post2",null, null,null,null,null),
-            Post(PostType.EVENT, 3, "2020-09-09 10:20:03", "Ivanov", "Post3","Москва, ул. Ленинская Слобода", Pair(56.13003526647825 , 40.41206278961915),null,null,null),
-            Post(PostType.REPOST,4,"2020-12-09 19:20:03","Petrov",null,null,null ,"RepostText",null,null),
-            Post(PostType.VIDEO,5,"2020-12-09 19:20:03", "Petrov", "Post5" ,null,null,null,"https://www.youtube.com/watch?v=WhWc3b3KhnY",null),
-            Post(PostType.ADV, 6, "2020-12-09 19:20:03", "Petrov", "Post6", null, null,null,null,"https://netology.ru/") ,
+    val list = listOf(
+        Post(
+            PostType.SIMPLE,
+            1,
+            "2020-12-09 19:20:03",
+            "Peter",
+            "5 STEPS OF PREPARATION TO DEVELOP A NEW APPLICATION",
+            null,
+            null,
+            null,
+            null,
+            null
+        ),
+        Post(
+            PostType.SIMPLE,
+            2,
+            "2020-09-09 10:20:03",
+            "Anna",
+            "Kotlin syntax is similar to Java",
+            null,
+            null,
+            null,
+            null,
+            null
+        ),
+        Post(
+            PostType.EVENT,
+            3,
+            "2020-09-09 10:20:03",
+            "Ivanov",
+            "Gradle is an open-source build automation tool",
+            "Москва, ул. Ленинская Слобода",
+            Pair(56.13003526647825, 40.41206278961915),
+            null,
+            null,
+            null
+        ),
+        Post(
+            PostType.REPOST,
+            4,
+            "2020-12-09 19:20:03",
+            "Andry",
+            null,
+            null,
+            null,
+            "Repost: Android is a mobile operating system",
+            null,
+            null
+        ),
+        Post(
+            PostType.VIDEO,
+            5,
+            "2020-12-09 19:20:03",
+            "Petrov",
+            "Video time",
+            null,
+            null,
+            null,
+            "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+            null
+        ),
+        Post(
+            PostType.ADV,
+            6,
+            "2020-12-09 19:20:03",
+            "Netology",
+            "Study a new profession!",
+            null,
+            null,
+            null,
+            null,
+            "https://netology.ru/"
+        ),
     )
 
     private val adapter = AdapterPost {
@@ -47,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     init {
         currentList = list
     }
-    
+
 }
 
 

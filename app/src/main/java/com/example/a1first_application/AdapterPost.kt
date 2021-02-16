@@ -185,11 +185,10 @@ class AdapterPost(private val onRemovedListener: (position: Int) -> Unit) : List
     }
 
     private object PostDiffer : DiffUtil.ItemCallback<Post>() {
-        //который может вычислять разницу между двумя списками и выводить список операций обновления, которые преобразуют первый список во второй.
-        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean = //если id в  старом списке и новом списке одинаковые, то идем в метод areContentsTheSame и сравниваем эти объекты по другим полям
+        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
                 oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean = oldItem == newItem // сравнивает детали, поменялось ли что то или нет
+        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean = oldItem == newItem
     }
 
 }
